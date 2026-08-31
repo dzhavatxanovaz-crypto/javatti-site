@@ -1,0 +1,18 @@
+﻿# окружение и секреты
+.env
+.env.*
+*.key
+*.pem
+
+# сборка и зависимости
+node_modules/
+dist/
+build/
+
+# служебное
+.DS_Store
+Thumbs.db
+*.log
+
+# превью для артефакта — генерируется скриптом
+preview.html
