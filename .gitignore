@@ -16,3 +16,5 @@ Thumbs.db
 
 # превью для артефакта — генерируется скриптом
 preview.html
+
+platform-preview.html
