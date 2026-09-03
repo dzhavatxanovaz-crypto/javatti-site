@@ -280,3 +280,5 @@ section{padding:var(--sp-3xl) 0}
   body{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.foot-disclaimer{font-size:.75rem;color:var(--tapioca);opacity:.75;max-width:70ch;margin:var(--sp-md) 0 0;line-height:1.5}
