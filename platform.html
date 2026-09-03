@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Платформа клуба - прототип | JAVATTI</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ---------- специфика платформы, поверх общей дизайн-системы ---------- */
+body{background:var(--surface)}
+.proto-banner{background:var(--chicory);color:var(--cannoli);padding:10px 0;font-size:.8125rem;text-align:center}
+.proto-banner strong{color:var(--gold)}
+
+.appwrap{max-width:1040px;margin:0 auto;padding:var(--sp-lg) var(--sp-md) var(--sp-3xl)}
+.screen{display:none}
+.screen.on{display:block}
+
+/* переключатель демо-ролей, только для прототипа */
+.roleSwitch{display:flex;gap:8px;margin-bottom:var(--sp-xl);flex-wrap:wrap}
+.roleSwitch button{
+  font-family:var(--font-text);font-size:.8125rem;text-transform:uppercase;letter-spacing:.08em;
+  padding:9px 16px;border:1px solid var(--line-strong);background:var(--cannoli);color:var(--raindrum);cursor:pointer;
+}
+.roleSwitch button.active{background:var(--chicory);color:var(--cannoli);border-color:var(--chicory)}
+
+/* ---- вход ---- */
+.loginCard{max-width:420px;margin:var(--sp-2xl) auto;background:var(--cannoli);border:1px solid var(--line);padding:var(--sp-xl)}
+.loginCard h3{margin-bottom:8px}
+.loginCard p{color:var(--raindrum);font-size:.9375rem;margin-bottom:var(--sp-lg)}
+.loginCard input{
+  width:100%;font-family:var(--font-text);font-weight:200;font-size:1rem;padding:13px 14px;
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--chicory);margin-bottom:12px;
+}
+.loginCard input:focus{outline:none;border-color:var(--gold)}
+.codeRow{display:flex;gap:8px;margin-bottom:16px}
+.codeRow input{width:44px;text-align:center;padding:12px 0;font-size:1.125rem}
+.demoHint{font-size:.75rem;color:var(--line-strong);margin-top:10px}
+
+/* ---- кабинет ученицы ---- */
+.dashHead{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--sp-md);flex-wrap:wrap;margin-bottom:var(--sp-xl)}
+.dashHead h1{font-size:1.5rem}
+.statusPill{
+  display:inline-flex;align-items:center;gap:6px;font-size:.75rem;text-transform:uppercase;
+  letter-spacing:.08em;padding:6px 12px;border:1px solid currentColor;
+}
+.statusPill.active{color:var(--pesto)}
+.statusPill.expired{color:var(--cabernet)}
+.statusPill i{width:6px;height:6px;border-radius:50%;background:currentColor;display:block}
+
+.renewalBanner{background:var(--chicory);color:var(--cannoli);padding:var(--sp-md) var(--sp-lg);margin-bottom:var(--sp-xl);display:none}
+.renewalBanner.show{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-md);flex-wrap:wrap}
+.renewalBanner p{margin:0;color:var(--tapioca);max-width:52ch}
+.renewalBanner strong{color:var(--straw)}
+
+.blockCard{border:1px solid var(--line);background:var(--cannoli);margin-bottom:var(--sp-md)}
+.blockHead{display:flex;align-items:center;gap:var(--sp-md);padding:var(--sp-md) var(--sp-lg);cursor:pointer;user-select:none}
+.blockArch{width:44px;height:36px;flex:none;clip-path:polygon(0 100%,0 25%,20% 0,80% 0,100% 25%,100% 100%)}
+.blockArch.b-soul{background:var(--tapioca)}
+.blockArch.b-body{background:var(--rifle)}
+.blockArch.b-work{background:var(--chicory)}
+.blockHead .meta{flex:1}
+.blockHead .eyebrow{margin-bottom:4px}
+.blockHead h4{font-size:1.0625rem;text-transform:none;font-weight:300;letter-spacing:.03em}
+.blockProg{font-size:.75rem;color:var(--raindrum);font-variant-numeric:tabular-nums;white-space:nowrap}
+.blockBar{height:3px;background:var(--line);margin-top:6px;width:120px}
+.blockBar i{display:block;height:100%;background:var(--gold)}
+.blockChevron{font-size:1.25rem;color:var(--line-strong);transition:transform .15s}
+.blockCard.open .blockChevron{transform:rotate(180deg)}
+
+.lessonList{display:none;border-top:1px solid var(--line)}
+.blockCard.open .lessonList{display:block}
+.lesson{display:flex;align-items:center;gap:var(--sp-md);padding:14px var(--sp-lg);border-bottom:1px solid var(--line)}
+.lesson:last-child{border-bottom:0}
+.lesson-check{
+  width:22px;height:22px;flex:none;border:1.5px solid var(--line-strong);display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;color:var(--cannoli);cursor:pointer;
+}
+.lesson-check.done{background:var(--pesto);border-color:var(--pesto)}
+.lesson-title{flex:1;font-size:.9375rem}
+.lesson-dur{font-size:.75rem;color:var(--line-strong);font-variant-numeric:tabular-nums}
+
+.liveList{display:grid;gap:var(--sp-sm);margin-top:var(--sp-sm)}
+.liveItem{border:1px solid var(--line);background:var(--cannoli);padding:var(--sp-md);display:flex;justify-content:space-between;gap:var(--sp-md);align-items:center}
+.liveItem .d{font-size:.75rem;color:var(--raindrum);text-transform:uppercase;letter-spacing:.06em}
+
+/* ---- админка ---- */
+.adminTable{width:100%;border-collapse:collapse;font-size:.9375rem}
+.adminTable th{
+  text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--raindrum);
+  padding:10px 12px;border-bottom:1px solid var(--line-strong);font-weight:400;
+}
+.adminTable td{padding:12px;border-bottom:1px solid var(--line)}
+.adminTable tr:last-child td{border-bottom:0}
+.adminPill{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;padding:4px 9px;border:1px solid currentColor;display:inline-block}
+.adminPill.active{color:var(--pesto)}
+.adminPill.expired{color:var(--cabernet)}
+.adminPill.pending{color:var(--raindrum)}
+.miniBtn{
+  font-family:var(--font-text);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;
+  padding:7px 12px;border:1px solid var(--line-strong);background:transparent;color:var(--chicory);cursor:pointer;
+}
+.miniBtn:hover{background:var(--chicory);color:var(--cannoli);border-color:var(--chicory)}
+.adminStats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--sp-md);margin-bottom:var(--sp-xl)}
+.statCard{border:1px solid var(--line);background:var(--cannoli);padding:var(--sp-md)}
+.statCard .n{font-family:var(--font-head);font-weight:700;font-size:1.5rem;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.statCard .t{font-size:.75rem;color:var(--raindrum);margin-top:4px}
+
+@media (max-width:640px){
+  .adminTable{display:block;overflow-x:auto}
+  .blockHead{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<div class="proto-banner">Прототип платформы клуба - <strong>без бэкенда</strong>, данные демонстрационные и живут в браузере. Черновик к эфиру 04.09.</div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg viewBox="76 62 132 40" role="img" aria-label="JAVATTI"><path fill="#47332F" d="M176.113,62.595h-68.762L76.267,96.393v5.411h19.675l23.734-9.013c2.186-10.173,11.229-17.799,22.056-17.799c10.826,0,19.87,7.626,22.056,17.799l23.734,9.013h19.676v-5.411L176.113,62.595z"/><path fill="#47332F" d="M136.117,93.557c0.03-0.443,0.045-0.888,0.045-1.328c0-4.271-1.401-8.449-3.962-11.859c2.895-1.612,6.174-2.461,9.533-2.461c3.36,0,6.638,0.849,9.534,2.461c-2.561,3.41-3.962,7.588-3.962,11.859c0,0.441,0.015,0.885,0.045,1.328H136.117z"/></svg>
+      <span class="name">Javatti</span>
+    </a>
+    <nav class="site-nav" aria-label="Основная навигация">
+      <a href="index.html">На сайт</a>
+    </nav>
+  </div>
+</header>
+
+<div class="appwrap">
+
+  <div class="roleSwitch" role="tablist" aria-label="Демонстрационный переключатель экранов">
+    <button data-go="login" class="active">Вход</button>
+    <button data-go="dashboard">Кабинет ученицы</button>
+    <button data-go="admin">Админ-панель</button>
+  </div>
+
+  <!-- ЭКРАН: ВХОД -->
+  <section class="screen on" id="s-login">
+    <div class="loginCard">
+      <p class="eyebrow">Клуб «Душа. Тело. Дело»</p>
+      <h3 style="margin:10px 0 6px">Вход по коду</h3>
+      <p>Введите телефон или почту - пришлём код, пароль не нужен.</p>
+      <input type="text" placeholder="Телефон или почта" value="+7 999 000-00-00">
+      <button class="btn btn-dark" style="width:100%" onclick="showCode()">Получить код</button>
+      <div id="codeBlock" style="display:none;margin-top:16px">
+        <p style="font-size:.875rem;color:var(--raindrum);margin-bottom:10px">Код отправлен. В демо любой 4-значный подойдёт:</p>
+        <div class="codeRow">
+          <input maxlength="1" value="1"><input maxlength="1" value="2"><input maxlength="1" value="3"><input maxlength="1" value="4">
+        </div>
+        <button class="btn btn-primary" style="width:100%" onclick="go('dashboard')">Войти</button>
+      </div>
+      <p class="demoHint">Прототип: реальная отправка кода подключается вместе с сервером.</p>
+    </div>
+  </section>
+
+  <!-- ЭКРАН: КАБИНЕТ УЧЕНИЦЫ -->
+  <section class="screen" id="s-dashboard">
+    <div class="dashHead">
+      <div>
+        <p class="eyebrow">Личный кабинет</p>
+        <h1>Здравствуйте, Амина</h1>
+      </div>
+      <span class="statusPill active" id="statusPill"><i></i> Доступ активен до 2 декабря</span>
+    </div>
+
+    <div class="renewalBanner" id="renewalBanner">
+      <p><strong>Доступ к программе закончился.</strong> Продлите участие за 1 900 ₽/мес - сообщество, еженедельные эфиры и разборы.</p>
+      <button class="btn btn-primary" onclick="toggleExpired(false)">Продлить</button>
+    </div>
+
+    <p class="eyebrow" style="margin-bottom:var(--sp-sm)">Программа</p>
+
+    <div class="blockCard open" data-block="soul">
+      <div class="blockHead" onclick="toggleBlock(this)">
+        <span class="blockArch b-soul"></span>
+        <div class="meta">
+          <p class="eyebrow">Модуль 1</p>
+          <h4>Душа</h4>
+          <div class="blockBar"><i style="width:66%"></i></div>
+        </div>
+        <span class="blockProg">2 / 3</span>
+        <span class="blockChevron">v</span>
+      </div>
+      <div class="lessonList">
+        <div class="lesson">
+          <span class="lesson-check done" onclick="event.stopPropagation();this.classList.toggle('done')">✓</span>
+          <span class="lesson-title">Точка А: где вы сейчас с опорой</span>
+          <span class="lesson-dur">18 мин</span>
+        </div>
+        <div class="lesson">
+          <span class="lesson-check done" onclick="event.stopPropagation();this.classList.toggle('done')">✓</span>
+          <span class="lesson-title">Регулярность вместо порывов</span>
+          <span class="lesson-dur">24 мин</span>
+        </div>
+        <div class="lesson">
+          <span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span>
+          <span class="lesson-title">Ориентиры в решениях</span>
+          <span class="lesson-dur">21 мин</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="blockCard" data-block="body">
+      <div class="blockHead" onclick="toggleBlock(this)">
+        <span class="blockArch b-body"></span>
+        <div class="meta">
+          <p class="eyebrow">Модуль 2</p>
+          <h4>Тело</h4>
+          <div class="blockBar"><i style="width:0%"></i></div>
+        </div>
+        <span class="blockProg">0 / 4</span>
+        <span class="blockChevron">v</span>
+      </div>
+      <div class="lessonList">
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Точка А: энергия и ресурс</span><span class="lesson-dur">19 мин</span></div>
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Сон и режим</span><span class="lesson-dur">22 мин</span></div>
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Питание без диет</span><span class="lesson-dur">27 мин</span></div>
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Движение как привычка</span><span class="lesson-dur">20 мин</span></div>
+      </div>
+    </div>
+
+    <div class="blockCard" data-block="work">
+      <div class="blockHead" onclick="toggleBlock(this)">
+        <span class="blockArch b-work"></span>
+        <div class="meta">
+          <p class="eyebrow">Модуль 3</p>
+          <h4>Дело</h4>
+          <div class="blockBar"><i style="width:0%"></i></div>
+        </div>
+        <span class="blockProg">0 / 4</span>
+        <span class="blockChevron">v</span>
+      </div>
+      <div class="lessonList">
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Цифры вместо ощущений</span><span class="lesson-dur">25 мин</span></div>
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Продуктовая линейка</span><span class="lesson-dur">23 мин</span></div>
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Делегирование первой задачи</span><span class="lesson-dur">19 мин</span></div>
+        <div class="lesson"><span class="lesson-check" onclick="event.stopPropagation();this.classList.toggle('done')"></span><span class="lesson-title">Система, которая работает без вас</span><span class="lesson-dur">26 мин</span></div>
+      </div>
+    </div>
+
+    <p class="eyebrow" style="margin:var(--sp-2xl) 0 var(--sp-sm)">Эфиры сообщества <span style="text-transform:none;letter-spacing:0">- открыто при продлении</span></p>
+    <div class="liveList" style="opacity:.45;pointer-events:none">
+      <div class="liveItem"><span>Разбор: как не бросить на второй месяц</span><span class="d">Ср, 10 сентября</span></div>
+      <div class="liveItem"><span>Живой эфир: вопросы по модулю «Тело»</span><span class="d">Ср, 17 сентября</span></div>
+    </div>
+    <p class="caption" style="margin-top:10px">Раздел разблокируется автоматически после продления - сейчас показан для образца вёрстки.</p>
+  </section>
+
+  <!-- ЭКРАН: АДМИНКА -->
+  <section class="screen" id="s-admin">
+    <p class="eyebrow">Админ-панель</p>
+    <h1 style="margin-bottom:var(--sp-xl)">Участницы клуба</h1>
+
+    <div class="adminStats">
+      <div class="statCard"><span class="n">3</span><span class="t">всего участниц</span></div>
+      <div class="statCard"><span class="n">2</span><span class="t">доступ активен</span></div>
+      <div class="statCard"><span class="n">1</span><span class="t">ожидает оплаты</span></div>
+      <div class="statCard"><span class="n">1</span><span class="t">заявка с сайта</span></div>
+    </div>
+
+    <p class="eyebrow" style="margin-bottom:var(--sp-sm)">Участницы</p>
+    <div style="overflow-x:auto">
+    <table class="adminTable">
+      <thead>
+        <tr><th>Имя</th><th>Контакт</th><th>Вступила</th><th>Доступ до</th><th>Прогресс</th><th>Статус</th><th></th></tr>
+      </thead>
+      <tbody id="adminBody">
+        <tr>
+          <td>Амина Р.</td><td>+7 999 000-00-00</td><td>02.09.2026</td><td>02.12.2026</td><td>2 / 11</td>
+          <td><span class="adminPill active">Активна</span></td>
+          <td><button class="miniBtn">Продлить</button></td>
+        </tr>
+        <tr>
+          <td>Марьям С.</td><td>+7 988 111-22-33</td><td>15.08.2026</td><td>15.11.2026</td><td>8 / 11</td>
+          <td><span class="adminPill active">Активна</span></td>
+          <td><button class="miniBtn">Продлить</button></td>
+        </tr>
+        <tr>
+          <td>Хадижа Т.</td><td>+7 963 555-44-11</td><td>-</td><td>-</td><td>-</td>
+          <td><span class="adminPill pending">Ждёт оплаты</span></td>
+          <td><button class="miniBtn" onclick="markPaid(this)">Отметить оплату</button></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="eyebrow" style="margin:var(--sp-2xl) 0 var(--sp-sm)">Новые заявки с сайта</p>
+    <div style="border:1px solid var(--line);background:var(--cannoli);padding:var(--sp-md)">
+      <p style="margin:0 0 4px"><strong>Зульфия К.</strong> - +7 928 777-66-55</p>
+      <p class="caption" style="margin:0">«Хочу понять, с чего начать - постоянно устаю и не могу собраться»</p>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="miniBtn">Создать доступ</button>
+        <button class="miniBtn">В спам</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+function go(name){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('on'); });
+  document.getElementById('s-'+name).classList.add('on');
+  document.querySelectorAll('.roleSwitch button').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelector('.roleSwitch button[data-go="'+name+'"]').classList.add('active');
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.roleSwitch button').forEach(function(b){
+  b.addEventListener('click', function(){ go(b.getAttribute('data-go')); });
+});
+
+function showCode(){ document.getElementById('codeBlock').style.display='block'; }
+
+function toggleBlock(el){
+  var card = el.closest('.blockCard');
+  var isOpen = card.classList.contains('open');
+  document.querySelectorAll('.blockCard').forEach(function(c){ c.classList.remove('open'); });
+  if(!isOpen) card.classList.add('open');
+}
+
+function toggleExpired(force){
+  var expired = force !== undefined ? force : !document.getElementById('renewalBanner').classList.contains('show');
+  var pill = document.getElementById('statusPill');
+  var banner = document.getElementById('renewalBanner');
+  if(expired){
+    banner.classList.add('show');
+    pill.className = 'statusPill expired';
+    pill.innerHTML = '<i></i> Доступ истёк 28 августа';
+  } else {
+    banner.classList.remove('show');
+    pill.className = 'statusPill active';
+    pill.innerHTML = '<i></i> Доступ активен до 2 декабря';
+  }
+}
+
+function markPaid(btn){
+  var row = btn.closest('tr');
+  row.querySelector('.adminPill').outerHTML = '<span class="adminPill active">Активна</span>';
+  row.children[2].textContent = new Date().toLocaleDateString('ru-RU');
+  row.children[3].textContent = 'через 3 мес.';
+  row.children[4].textContent = '0 / 11';
+  btn.textContent = 'Продлить';
+}
+</script>
+
+</body>
+</html>

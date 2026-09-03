@@ -1,5 +1,5 @@
 /* ============================================================
-   JAVATTI GROUP — стили сайта
+   JAVATTI GROUP - стили сайта
    Строго по дизайн-системе бренда. Правила: ../CLAUDE.md
    ============================================================ */
 
@@ -124,22 +124,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .btn-primary:hover{background:var(--straw)}
 .btn-ghost{background:transparent;color:var(--cannoli);border-color:var(--tapioca)}
 .btn-ghost:hover{background:var(--cannoli);color:var(--chicory)}
+.btn-outline{background:transparent;color:var(--chicory);border-color:var(--line-strong)}
+.btn-outline:hover{background:var(--chicory);color:var(--cannoli);border-color:var(--chicory)}
 .btn-dark{background:var(--chicory);color:var(--cannoli)}
 .btn-dark:hover{background:var(--raindrum)}
 
 /* ---------- секции ---------- */
 section{padding:var(--sp-3xl) 0}
 .sec-head{margin-bottom:var(--sp-2xl);display:grid;gap:var(--sp-sm)}
-
-/* метафора */
-.meta-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--sp-2xl);align-items:center}
-.bridge-fig{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end}
-.bridge-fig span{display:block;background:var(--tapioca);height:110px}
-.bridge-fig span:nth-child(3){background:var(--gold);height:150px}
-.bridge-fig span:nth-child(2),.bridge-fig span:nth-child(4){height:130px}
-.river{height:2px;background:var(--gold);margin-top:var(--sp-sm)}
-.river-split{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
-.river-split span{height:2px;background:var(--line-strong)}
 
 /* направления */
 .dirs{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:var(--sp-md)}
@@ -157,6 +149,13 @@ section{padding:var(--sp-3xl) 0}
 .dir h4{color:var(--chicory)}
 .dir p{font-size:.9375rem;color:var(--raindrum);margin:0}
 .dir .more{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--raindrum);margin-top:var(--sp-2xs)}
+
+/* цены клуба */
+.club-price{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-md);align-items:stretch}
+.pc{border:1px solid var(--line);padding:var(--sp-md);display:flex;flex-direction:column;gap:8px}
+.pc-main{border-color:var(--line-strong);background:var(--cannoli)}
+.pc-num{font-family:var(--font-head);font-weight:700;font-size:1.5rem;letter-spacing:.08em;margin:0;line-height:1.1;font-variant-numeric:tabular-nums}
+.pc-note{font-size:.9375rem;margin:0;color:var(--raindrum)}
 
 /* принципы */
 .principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--sp-xl)}
@@ -184,6 +183,74 @@ section{padding:var(--sp-3xl) 0}
 .form-status{margin-top:var(--sp-sm);font-size:.9375rem;display:none}
 .form-status.ok{display:block;color:var(--rifle)}
 .form-status.bad{display:block;color:var(--cabernet)}
+
+/* ступени экосистемы */
+.steps{list-style:none;padding:0;margin:0;display:grid}
+.step-row{display:grid;grid-template-columns:132px 1fr;gap:var(--sp-xl);padding:var(--sp-lg) 0;border-top:1px solid var(--line);align-items:start}
+.step-row:last-child{border-bottom:1px solid var(--line)}
+.step-mark{display:flex;flex-direction:column;gap:var(--sp-sm)}
+.step-n{font-family:var(--font-head);font-weight:700;font-size:1.125rem;letter-spacing:.14em;color:var(--line-strong);font-variant-numeric:tabular-nums}
+.step-arch{display:block;width:100%;height:72px;background:var(--tapioca)}
+.step-arch.biz{background:var(--chicory)}
+.step-arch.dev{background:var(--rifle)}
+.step-arch.mode{background:var(--cabernet)}
+.step-role{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--raindrum);margin:0 0 8px}
+.step-body h4{margin:0 0 10px;font-size:1.25rem;text-transform:none;font-weight:300;letter-spacing:.04em}
+.step-body h4 a{text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:2px}
+.step-body h4 a:hover{border-bottom-color:var(--gold)}
+.step-body p{margin:0;max-width:62ch;color:var(--raindrum)}
+
+/* основатель */
+.founder{display:grid;gap:var(--sp-xl)}
+.founder-portrait{margin:0}
+.founder-portrait img{
+  display:block;width:100%;height:auto;
+  clip-path:polygon(0 100%,0 20%,11% 0,89% 0,100% 20%,100% 100%);
+}
+.founder-portrait figcaption{
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;
+  color:var(--raindrum);margin-top:12px;
+}
+.founder-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-md);margin-top:var(--sp-lg);padding-top:var(--sp-lg);border-top:1px solid var(--line)}
+.ff-n{display:block;font-family:var(--font-head);font-weight:700;font-size:1.375rem;letter-spacing:.06em;color:var(--chicory);font-variant-numeric:tabular-nums}
+.ff-t{display:block;font-size:.8125rem;color:var(--raindrum);margin-top:6px;line-height:1.35}
+
+@media (max-width:820px){
+  .club-price{grid-template-columns:1fr}
+  .step-row{grid-template-columns:88px 1fr;gap:var(--sp-md)}
+  .step-arch{height:56px}
+  .founder-facts{grid-template-columns:1fr;gap:var(--sp-sm)}
+}
+
+/* документы и внутренние страницы */
+.wrap-narrow{max-width:760px}
+.doc{padding:var(--sp-3xl) 0 var(--sp-2xl)}
+.doc-title{font-size:clamp(1.5rem,1.1rem+1.6vw,2.25rem);margin:var(--sp-sm) 0 var(--sp-2xs);text-wrap:balance}
+.doc-date{font-size:.8125rem;color:var(--raindrum);margin-bottom:var(--sp-xl)}
+.doc h2{font-size:1rem;margin:var(--sp-xl) 0 var(--sp-sm)}
+.doc h3{font-size:1.125rem;margin:var(--sp-lg) 0 var(--sp-sm);text-transform:none;font-weight:300}
+.doc p{max-width:none}
+.doc ul{padding-left:1.1em;margin:0 0 var(--sp-sm)}
+.doc li{margin-bottom:6px}
+.doc-note{background:var(--surface);border-left:3px solid var(--gold);padding:var(--sp-md);margin-bottom:var(--sp-xl)}
+.doc-note p{font-size:.9375rem;color:var(--raindrum)}
+.req{list-style:none;padding:0;margin:0 0 var(--sp-md)}
+.req li{display:flex;gap:var(--sp-sm);flex-wrap:wrap;padding:9px 0;border-bottom:1px solid var(--line);font-size:.9375rem}
+.req li span{min-width:190px;color:var(--raindrum);font-size:.8125rem;text-transform:uppercase;letter-spacing:.1em;padding-top:2px}
+.doc-back{margin-top:var(--sp-2xl);padding-top:var(--sp-md);border-top:1px solid var(--line)}
+
+/* страница направления */
+.page-hero{background:var(--chicory);color:var(--cannoli);padding:var(--sp-3xl) 0}
+.page-hero .eyebrow{color:var(--gold)}
+.page-hero h1{color:var(--straw);margin:var(--sp-sm) 0 var(--sp-md);text-wrap:balance}
+.page-hero .lead{color:var(--tapioca);max-width:52ch}
+.page-hero.dev{background:var(--rifle)}
+.page-hero.mode{background:var(--cabernet)}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--sp-lg)}
+.feat h4{margin-bottom:var(--sp-2xs)}
+.feat p{font-size:.9375rem;color:var(--raindrum);margin:0}
+.cta-band{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left}
+.thanks{min-height:64vh;display:flex;align-items:center}
 
 /* подвал */
 .site-foot{background:var(--chicory);color:var(--tapioca);padding:var(--sp-2xl) 0 var(--sp-xl)}
